@@ -23,6 +23,7 @@ jobs:
 
     - name: Build
       run: |
+        echo "strDate=$(TZ=UTC-8 date +%Y-%m-%d)" >> $GITHUB_ENV
         mkdir ./release
         CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o ./release/ip2country_linux -v .
         CGO_ENABLED=0 GOOS=darwin GOARCH=amd64 go build -o ./release/ip2country_darwin -v .
