@@ -1,22 +1,23 @@
 package main
 
 import (
+	"flag"
 	"fmt"
-	"github.com/oschwald/geoip2-golang"
 	"log"
+	"main/asset"
 	"net"
 	"os"
-	"flag"
-)
 
-var mmdbPath = flag.String("mmdb","./Country.mmdb", "Path to geoip mmdb file")
+	"github.com/oschwald/geoip2-golang"
+)
 
 func init() {
 	flag.Parse()
 }
 
 func main() {
-	db, err := geoip2.Open(*mmdbPath)
+	mmdb, _ := asset.Asset("Country.mmdb")
+	db, err := geoip2.FromBytes(mmdb)
 	if err != nil {
 		log.Fatal(err)
 	}
